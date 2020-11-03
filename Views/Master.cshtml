@@ -21,7 +21,7 @@
 
 		<!-- Header -->
 			<header id="header" class="alt">
-				<h1><a href="index.html" style="color: red;">Website</a></h1>
+				<h1><a href="/" style="color: red;">Website</a></h1>
 				<a href="#nav" style="color: red;">Menu</a>
 			</header>
 
@@ -33,6 +33,7 @@
                     @foreach (var item in selection)
                     {
                         <a class="nav-link @(item.IsAncestorOrSelf(Model) ? "nav-link--active" : null)" href="@item.Url">@item.Name</a>
+                        <br />
                     }
                 </ul>
             </nav>
@@ -66,6 +67,8 @@
 
 		<!-- Scripts -->
 			<script src="/assets/js/jquery.min.js"></script>
+			<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+            <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
 			<script src="/assets/js/skel.min.js"></script>
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
