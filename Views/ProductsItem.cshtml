@@ -1,5 +1,20 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.ProductsItem>
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
-	Layout = "Master.cshtml";
+    Layout = "Master.cshtml";
+    var image = Model.Value<IPublishedContent>("image");
 }
+
+
+<section id="main" class="wrapper">
+    <div class="container">
+        <header class="major special">
+            <h2>@Model.Value("productName")</h2>
+        </header>
+        <div >  
+            <p>@Model.Value("productDescription")</p>
+        </div>
+        <div>
+            <img src="@image.Url" style="width: 300px; height: 500px;" />
+        </div>
+</section>
