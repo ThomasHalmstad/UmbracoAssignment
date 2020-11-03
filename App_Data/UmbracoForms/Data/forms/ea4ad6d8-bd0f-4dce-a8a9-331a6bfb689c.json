@@ -100,6 +100,37 @@
                   },
                   "preValues": [],
                   "allowedUploadTypes": null
+                },
+                {
+                  "caption": "Consent to store sentsitive data",
+                  "tooltip": "",
+                  "placeholder": null,
+                  "cssClass": null,
+                  "alias": "consentToStoreSentsiitveData",
+                  "id": "0d65a3a3-4a7a-42bf-cf70-b30ff51241d2",
+                  "fieldTypeId": "0dd29d42-a6a5-11de-a2f2-222256d89593",
+                  "prevalueSourceId": "00000000-0000-0000-0000-000000000000",
+                  "dataSourceFieldKey": null,
+                  "containsSensitiveData": false,
+                  "mandatory": true,
+                  "regex": null,
+                  "requiredErrorMessage": null,
+                  "invalidErrorMessage": null,
+                  "condition": {
+                    "id": "00000000-0000-0000-0000-000000000000",
+                    "enabled": false,
+                    "actionType": "Show",
+                    "logicType": "All",
+                    "rules": []
+                  },
+                  "settings": {
+                    "DefaultValue": ""
+                  },
+                  "preValues": [
+                    "Yes",
+                    "No"
+                  ],
+                  "allowedUploadTypes": null
                 }
               ]
             }
