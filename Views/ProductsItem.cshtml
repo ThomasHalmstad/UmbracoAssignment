@@ -11,10 +11,12 @@
         <header class="major special">
             <h2>@Model.Value("productName")</h2>
         </header>
-        <div >  
-            <p>@Model.Value("productDescription")</p>
-        </div>
-        <div>
-            <img src="@image.Url" style="width: 300px; height: 500px;" />
+        <div class="row">
+            <div class="col-6 text-center">
+                <img src="@image.Url" style="width: auto; height: 400px;" />
+            </div>
+            <div class="col-6 text-center">  
+                <p>@Model.Value("productDescription")</p>
+            </div>
         </div>
 </section>
