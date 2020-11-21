@@ -6,11 +6,13 @@
 
 <section id="main" class="wrapper">
 	<div class="container">
-		<header class="major speci">
-			<h2>@Model.Value("Title")</h2>
+		<header class="major special">
+			<h2 class="text-center">@Model.Value("Title")</h2>
 		</header>
 		<div>
-		    <p>@Model.Value("bodyText")</p>
+		    @{
+		        Html.RenderAction("RenderContactForm", "Contact");
+		    }
 		</div>
 	</div>
 </section>

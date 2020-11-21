@@ -1,77 +1,145 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using ClientDependency.Core.Mvc
+
 @{
-	Layout = null;
+    Layout = null;
 }
 
 @{
     var site = Model.Root();
-    var selection = site.Children.Where(x => x.IsVisible());
+    var selection = site.Children.Where(x => x.IsVisible()); <!-- see below for explanation of IsVisible helper method -->
 }
 
 <!DOCTYPE HTML>
 
 <html>
-	<head>
-		<title>Retrospect by TEMPLATED</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="/assets/css/main.css" />
-	</head>
-	<body class="landing">
+<head>
+    <title>Welcome by TEMPLATED</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link href="/assets/CookieConsent/cookiealert.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 
-		<!-- Header -->
-			<header id="header" class="alt">
-				<h1><a href="/" style="color: red;">Website</a></h1>
-				<a href="#nav" style="color: red;">Menu</a>
-			</header>
+    @{
+        Html.RequiresCss("/css/CookieConsent.css");
+        Html.RequiresJs("/scripts/CookieConsent.js");
+    }
+</head>
 
-		<!-- Nav -->
-            <nav id="nav">
-                <ul class="links">
-                    <a class="nav-link @Html.Raw(Model.Id == site.Id ? "navi-link--active" : "")" href="@site.Url">@site.Name</a>
-                    <br />
+<body class="landing">
+
+    <!-- Header -->
+    <header id="header" class="alt">
+        <h1><a href="@site.Url()" style="color:orangered;">Beerutiful</a></h1>
+        <a href="#nav" style="color:orangered;">Menu</a>
+    </header>
+
+    @if (Umbraco.MemberIsLoggedOn())
+    {
+        <!-- Nav -->
+        <nav id="nav">
+            <ul class="links">
+                <ul>
+                    <li>
+                        <a class="nav-link @Html.Raw(Model.Id == site.Id ? " navi-link--active" : "" )" href="@site.Url()">@site.Name </a>
+                    </li>
+
                     @foreach (var item in selection)
                     {
-                        <a class="nav-link @(item.IsAncestorOrSelf(Model) ? "nav-link--active" : null)" href="@item.Url">@item.Name</a>
-                        <br />
+                        <li>
+                            <a class="nav-link @(item.IsAncestorOrSelf(Model) ? " nav-link--active" : null)" href="@item.Url()">@item.Name</a>
+                        </li>
                     }
                 </ul>
-            </nav>
-			
-			@RenderBody();
-			
-	    <!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<ul class="icons">
-						<li><a href="#" class="icon fa-facebook">
-							<span class="label">Facebook</span>
-						</a></li>
-						<li><a href="#" class="icon fa-twitter">
-							<span class="label">Twitter</span>
-						</a></li>
-						<li><a href="#" class="icon fa-instagram">
-							<span class="label">Instagram</span>
-						</a></li>
-						<li><a href="#" class="icon fa-linkedin">
-							<span class="label">LinkedIn</span>
-						</a></li>
-					</ul>
-					<ul class="copyright">
-						<li>&copy; @Model.Value("footerText", fallback: Fallback.ToAncestors)</li>
-						<li>Images: <a href="http://unsplash.com">Unsplash</a>.</li>
-						<li>Design: <a href="http://templated.co">TEMPLATED</a>.</li>
-					</ul>
-				</div>
-			</footer>
+            </ul>
+            @using (Html.BeginUmbracoForm("SubmitLogout", "Member", FormMethod.Post, new { id = "logout" }))
+            {
+                var myUser = Membership.GetUser();
+                if (myUser != null)
+                {
+                    <div>
+                        <p>
+                            <strong>Logged in as</strong>
+                            <span>@myUser.UserName</span>
+                        </p>
 
-		<!-- Scripts -->
-			<script src="/assets/js/jquery.min.js"></script>
-			<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
-            <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
-			<script src="/assets/js/skel.min.js"></script>
-			<script src="/assets/js/util.js"></script>
-			<script src="/assets/js/main.js"></script>
+                        <button name="logout" type="submit"><span>Logout</span><i class="fa fa-arrow-right"></i></button>
+                    </div>
+                }
+            }
+        </nav>
+    }
+    else
+    {
+        <nav id="nav">
+            <ul class="links">
+                <ul>
+                    <li>
+                        <a class="nav-link @Html.Raw(Model.Id == site.Id ? " navi-link--active" : "" )" href="/register">Register </a>
+                    </li>
+                    <li>
+                        <a class="nav-link @Html.Raw(Model.Id == site.Id ? " navi-link--active" : "" )" href="/login">Login </a>
+                    </li>
+                </ul>
+            </ul>
+        </nav>
+    }
 
-	</body>
-</html>
+    @RenderBody();
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li>
+                    <a href="#" class="icon fa-facebook">
+                        <span class="label">Facebook</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="icon fa-twitter">
+                        <span class="label">Twitter</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="icon fa-instagram">
+                        <span class="label">Instagram</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="icon fa-linkedin">
+                        <span class="label">LinkedIn</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; @Model.Value("footerText", fallback: Fallback.ToAncestors)</li>
+                <li>Images: <a href="http://unsplash.com">Unsplash</a>.</li>
+                <li>Design: <a href="http://templated.co">TEMPLATED</a>.</li>
+            </ul>
+        </div>
+    </footer>
+
+    <!--Cookie Consent -->
+    <div class="alert alert-dismissible text-center cookiealert" role="alert">
+        <div class="cookiealert-container">
+            <b style="color:white">Do you like cookies?</b> &#x1F36A; We use cookies to ensure you get the best experience on our website. <a href="http://cookiesandyou.com/" target="_blank">Learn more</a>
+
+            <button type="button" class="btn btn-primary btn-sm acceptcookies" aria-label="Close">
+                I agree
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/assets/js/skel.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="https://kit.fontawesome.com/1242740847.js" crossorigin="anonymous"></script>
+
+</body>
+</html>ja tack

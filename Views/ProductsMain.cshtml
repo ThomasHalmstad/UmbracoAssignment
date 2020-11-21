@@ -27,18 +27,18 @@
             <ul>
                 @foreach (ContentModels.ProductsItem item in selection)
                 {
-                <article class="special">
-                    @try{
-                    <div> <img src="@item.Image.Url" style="width: 200px; height: 400px;" /></div>
-                    }
-                    catch(Exception e)
-                    {
-                    }
+                    <article class="special">
+                        @try{
+                        <div> <img src="@item.Image.Url" style="width: 200px; height: 400px;" /></div>
+                        }
+                        catch(Exception e)
+                        {
+                        }
 
-                    <div class="productstitle"><strong><a href="@item.Url">@item.Name</a> </strong></div>
-                    <div class="productspreview">@Html.Truncate(item.Value("productDescription").ToString(), 30, true)</div>
-                </article>
-                <hr />
+                        <div class="productstitle"><strong><a href="@item.Url">@item.Name</a> </strong></div>
+                        <div class="productspreview">@Html.Truncate(item.Value("productDescription").ToString(), 30, true)</div>
+                    </article>
+                    <hr />
                 }
             </ul>
         </div>
