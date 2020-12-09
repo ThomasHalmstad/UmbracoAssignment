@@ -270,6 +270,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\CustomWelcomeDashboard\customWelcomeDashboard.controller.js" />
+    <Content Include="App_Plugins\CustomWelcomeDashboard\customWelcomeDashboard.css" />
+    <Content Include="App_Plugins\CustomWelcomeDashboard\lang\en-US.xml" />
+    <Content Include="App_Plugins\CustomWelcomeDashboard\WelcomeDashboard.html" />
     <Content Include="App_Plugins\UmbracoForms\Assets\BaremetricsCalendar\public\css\application.css" />
     <Content Include="App_Plugins\UmbracoForms\Assets\BaremetricsCalendar\public\js\Calendar.js" />
     <Content Include="App_Plugins\UmbracoForms\Assets\datepicker.init.js" />
@@ -449,6 +453,7 @@
     <Content Include="App_Plugins\UmbracoForms\package.manifest" />
     <Content Include="App_Plugins\UmbracoForms\RazorTemplates\HtmlTable.cshtml" />
     <Content Include="App_Plugins\UmbracoForms\UmbracoForms.config" />
+    <Content Include="App_Plugins\CustomWelcomeDashboard\package.manifest" />
     <None Include="packages.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
